@@ -1,0 +1,2 @@
+****My pattern examples collection****
+
