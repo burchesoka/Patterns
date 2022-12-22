@@ -1,6 +1,8 @@
 import json
 import xml.etree.ElementTree as et
 
+from typing import Type
+
 
 class SerializerInterface:
     def start_object(self, object_name: str, object_id: str):
@@ -46,7 +48,7 @@ class SerializerFactory:
     def __init__(self):
         self._creators = {}
 
-    def register_format(self, format_: str, creator: type[SerializerInterface]):
+    def register_format(self, format_: str, creator: Type[SerializerInterface]):
         self._creators[format_] = creator
 
     def get_serializer(self, format_: str) -> SerializerInterface:
