@@ -1,18 +1,22 @@
+from abc import ABC, abstractmethod
 import json
 import xml.etree.ElementTree as et
 
 from typing import Type
 
 
-class SerializerInterface:
+class SerializerInterface(ABC):
+    @abstractmethod
     def start_object(self, object_name: str, object_id: str):
-        raise NotImplemented
+        """Creates object"""
 
+    @abstractmethod
     def add_property(self, name: str, value: str):
-        raise NotImplemented
+        """ Adds property to object """
 
+    @abstractmethod
     def to_str(self):
-        raise NotImplemented
+        """returns object as string"""
 
 
 class JsonSerializer(SerializerInterface):
@@ -64,9 +68,10 @@ factory.register_format('JSON', JsonSerializer)
 factory.register_format('XML', XmlSerializer)
 
 
-class SerializableInterface:
+class SerializableInterface(ABC):
+    @abstractmethod
     def serialize(self, serializer: SerializerInterface):
-        raise NotImplemented
+        """Serialize object"""
 
 
 class ObjectSerializer:
